@@ -22,8 +22,21 @@ function saveUserSession(array $user)
     }
 
     // セッションに保存
-    $_SESSION['USER'] = $user;
+    $_SESSION['PROFILE'] = $user;
 }
+
+
+// ユーザー情報をセッションから削除
+function deleteUserSession()
+{
+    // セッションを開始していない場合
+    if(session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    unset($_SESSION['PROFILE']);
+}
+
 
 // セッションのユーザー情報を取得
 function getUserSession()
@@ -34,11 +47,11 @@ function getUserSession()
     }
 
     // セッションにユーザー情報がない場合
-    if(!isset($_SESSION['USER'])) {
+    if(!isset($_SESSION['PROFILE'])) {
         return false;
     }
 
-    $user = $_SESSION['USER'];
+    $user = $_SESSION['PROFILE'];
 
     // 画像ファイル名からファイルのURLを取得
     if(!isset($user['image_name'])) {
@@ -47,4 +60,31 @@ function getUserSession()
     $user['image_path'] = buildImagePath($user['image_name']);
 
     return $user;
+}
+
+
+// 画像のアップロード
+function uploadImage(array $user, array $file)
+{
+    // 画像ファイル名から拡張子を取得
+    $image_extension = strchr($file['name'], '.');
+
+    // 画像のファイル名を作成
+    $image_name = $user['id'] . '_' . date('YmdHis') . $image_extension;
+
+    // 保存先のディレクトリ
+    $directory = '../Views/img';
+
+    // 画像のパス
+    $image_path = $direcotry . $image_name;
+
+    // 画像を設置
+    move_uploaded_file($file['tmp_name'], $image_path);
+
+    // 画像ファイルチェック
+    if(exif_imagetype($image_path)) {
+        return $image_name;
+    }
+    echo '選択されたファイルが画像ではないため処理を停止しました。';
+    exit;
 }
