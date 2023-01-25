@@ -76,8 +76,8 @@ function updateUser(array $data)
 }
 
 
-// ユーザーのアカウント一覧
-function acountUser()
+// ユーザーのアカウント一覧（自分以外のユーザー表示）
+function acountUser(int $user_id)
 {
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -86,7 +86,7 @@ function acountUser()
         exit;
     } 
 
-    $query = "SELECT id, nickname, email, image_name, profile FROM users ORDER BY created_at DESC";
+    $query = 'SELECT id, nickname, email, image_name, profile FROM users WHERE NOT  id = "' .$user_id. '" ORDER BY created_at DESC';
 
     $result = $mysqli->query($query);
 
@@ -163,7 +163,7 @@ function findUser(int $user_id)
     $user_id = $mysqli->real_escape_string($user_id);
 
     // SQLクエリの作成
-    $query = 'SELECT id, name, nickname, email, image_name, profile FROM users';
+    $query = 'SELECT id, name, nickname, email, image_name, profile FROM users WHERE id = "' .$user_id. '"';
 
     // クエリを実行
     if($result = $mysqli->query($query)) {

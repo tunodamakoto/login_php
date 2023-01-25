@@ -30,7 +30,7 @@ if(isset($_POST['nickname']) && isset($_POST['name']) && isset($_POST['email']))
 
     // 画像ファイルのアップロード
     if(isset($_FILES['image']) && is_uploaded_file($_FILES['image']['tmp_name'])) {
-        $data['image_name'] = uploadImage($user, $FILES['image']);
+        $data['image_name'] = uploadImage($user, $_FILES['image']);
     }
 
     if(updateUser($data)) {
@@ -43,8 +43,16 @@ if(isset($_POST['nickname']) && isset($_POST['name']) && isset($_POST['email']))
     }
 }
 
-$view_acount = acountUser();
+// アカウントがクリックされたら
+$requested_user_id = $user['id'];
+if(isset($_GET['user_id'])) {
+    $requested_user_id = $_GET['user_id'];
+}
+
+$view_acount = acountUser($user['id']);
 
 $view_user = $user;
+
+$view_requested_user = findUser($requested_user_id);
 
 include_once '../Views/home.php';

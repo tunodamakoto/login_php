@@ -73,10 +73,10 @@ function uploadImage(array $user, array $file)
     $image_name = $user['id'] . '_' . date('YmdHis') . $image_extension;
 
     // 保存先のディレクトリ
-    $directory = '../Views/img';
+    $directory = '../Views/img/';
 
     // 画像のパス
-    $image_path = $direcotry . $image_name;
+    $image_path = $directory . $image_name;
 
     // 画像を設置
     move_uploaded_file($file['tmp_name'], $image_path);
