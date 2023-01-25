@@ -3,9 +3,10 @@
 // ホームコントローラー
 ///////////////////////////////////////
 include_once '../config.php';
+include_once '../util.php';
 
 // ログインチェック
-$user = false;
+$user = getUserSession();
 if(!$user) {
     header('Location: ' .HOME_URL. 'Controllers/sign-in.php');
     exit;

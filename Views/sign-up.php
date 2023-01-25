@@ -13,7 +13,7 @@
             <input class="form-control" type="email" name="email" placeholder="メールアドレス" maxlength="254" required>
             <input class="form-control" type="password" name="password" placeholder="パスワード" minlength="4" maxlength="128" required>
             <button class="sign-btn" type="submit">登録する</button>
-            <p class="sign-link"><a href="">ログインする</a></p>
+            <p class="sign-link"><a href="sign-in.php">ログインする</a></p>
             <p class="sign-copy">&copy; 2023</p>
         </form>
     </main>

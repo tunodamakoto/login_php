@@ -3,6 +3,7 @@
 // サインアップコントローラー
 ///////////////////////////////////////
 include_once '../config.php';
+include_once '../util.php';
 include_once '../Models/users.php';
 
 // アカウント登録

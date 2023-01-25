@@ -8,7 +8,9 @@
     <main class="form-sign">
         <form action="" method="post">
             <h1>ログインする</h1>
-            <div class="sign-alert">ログインに失敗しました</div>
+            <?php if(isset($view_try_login_result) && $view_try_login_result === false): ?>
+                <div class="sign-alert">ログインに失敗しました</div>
+            <?php endif; ?>
             <input class="form-control" type="email" name="email" placeholder="メールアドレス" maxlength="254" required autofocus>
             <input class="form-control" type="password" name="password" placeholder="パスワード" minlength="4" maxlength="128" required>
             <button class="sign-btn" type="submit">ログイン</button>
