@@ -13,3 +13,11 @@ modalBack.addEventListener('click', function() {
     modal.classList.remove("show");
     modalBack.classList.remove('show');
 });
+
+let user = [
+    ["たなか","男性"],
+    ["すずき","女性"],
+    ["さとう","女性"]
+ ];
+ 
+ console.log(user);

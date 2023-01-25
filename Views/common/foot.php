@@ -1,0 +1,1 @@
+<script src="<?php echo HOME_URL; ?>Views/js/script.js"></script>

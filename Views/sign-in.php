@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
+    <?php include_once('../Views/common/head.php'); ?>
+    <title>Login | ログイン画面</title>
 </head>
 <body class="sign">
     <main class="form-sign">
@@ -16,7 +12,7 @@
             <input class="form-control" type="email" name="email" placeholder="メールアドレス" maxlength="254" required autofocus>
             <input class="form-control" type="password" name="password" placeholder="パスワード" minlength="4" maxlength="128" required>
             <button class="sign-btn" type="submit">ログイン</button>
-            <p class="sign-link"><a href="">会員登録する</a></p>
+            <p class="sign-link"><a href="sign-up.php">会員登録する</a></p>
             <p class="sign-copy">&copy; 2023</p>
         </form>
     </main>
