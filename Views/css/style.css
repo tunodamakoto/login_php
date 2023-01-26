@@ -147,7 +147,7 @@ body {
     transition: .3s;
 }
 
-.acount .profile .follow{
+.acount .profile .follow-btn{
     border: 1px solid #9d9d9d;
     background-color: #4e4e4e;
     color: #fff;
@@ -163,7 +163,7 @@ body {
     color: #fff;
 }
 
-.acount .profile .follow:hover{
+.acount .profile .follow-btn:hover{
     background-color: #fff;
     color: #4e4e4e;
 }
