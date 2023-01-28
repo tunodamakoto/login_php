@@ -53,6 +53,6 @@ $view_acount = acountUser($user['id']);
 
 $view_user = $user;
 
-$view_requested_user = findUser($requested_user_id);
+$view_requested_user = findUser($requested_user_id, $user['id']);
 
 include_once '../Views/home.php';

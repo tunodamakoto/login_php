@@ -151,7 +151,7 @@ function findUserAndCheckPassword(string $email, string $password)
 
 
 // ユーザーを1件取得
-function findUser(int $user_id)
+function findUser(int $user_id, int $login_user_id = null)
 {
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -161,11 +161,29 @@ function findUser(int $user_id)
     }
 
     $user_id = $mysqli->real_escape_string($user_id);
+    $login_user_id = $mysqli->real_escape_string($login_user_id);
 
-    // SQLクエリの作成
-    $query = 'SELECT id, name, nickname, email, image_name, profile FROM users WHERE id = "' .$user_id. '"';
+    $query = <<<SQL
+        SELECT
+            U.id,
+            U.name,
+            U.nickname,
+            U.email,
+            U.image_name,
+            U.profile,
+            -- フォロー中の数
+            (SELECT COUNT(1) FROM follows WHERE status = 'active' AND follow_user_id = U.id) AS follow_user_count,
+            -- フォロワーの数
+            (SELECT COUNT(1) FROM follows WHERE status = 'active' AND followed_user_id = U.id) AS followed_user_count,
+            -- ログインユーザーがフォローしている場合、フォローIDが入る
+            F.id AS follow_id
+        FROM
+            users AS U
+            LEFT JOIN follows AS F ON F.status = 'active' AND F.followed_user_id = '$user_id' AND F.follow_user_id = '$login_user_id'
+        WHERE
+            U.status = 'active' AND U.id = '$user_id'
+    SQL;
 
-    // クエリを実行
     if($result = $mysqli->query($query)) {
         $res = $result->fetch_array(MYSQLI_ASSOC);
     } else {
